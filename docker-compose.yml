@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  fast-api:
+    build:
+      context: .
+    command: bash -c "alembic upgrade head && uvicorn src.api.main:app --host 0.0.0.0 --reload"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env

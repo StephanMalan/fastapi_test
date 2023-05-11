@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  fast-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: bash -c "alembic upgrade head && coverage run --source=src --branch -m pytest -vv && coverage report --show-missing --skip-empty"
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+
+  postgres:
+    image: postgres
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
+      timeout: 1s
+      retries: 5
+    env_file:
+      - .env

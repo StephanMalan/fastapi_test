@@ -1,0 +1,48 @@
+[tool.poetry]
+name = "fastapi-test"
+version = "0.1.0"
+description = ""
+authors = ["StephanMalan <stephanmalan.rob@gmail.com>"]
+readme = "README.md"
+packages = []
+
+[tool.poetry.dependencies]
+python = "^3.11"
+alembic = "^1.10.4"
+fastapi = "^0.95.1"
+uvicorn = "^0.22.0"
+shapely = "^2.0.1"
+psycopg2-binary = "^2.9.6"
+python-dotenv = "^1.0.0"
+sqlalchemy = {extras = ["mypy"], version = "^2.0.12"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+pylint = "^2.15.10"
+mypy = "^0.991"
+pdbpp = "^0.10.3"
+types-requests = "^2.29.0.0"
+ruff = "^0.0.264"
+pytest = "^7.3.1"
+coverage = "^7.2.5"
+requests = "^2.30.0"
+httpx = "^0.24.0"
+pytest-cov = "^4.0.0"
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.mypy]
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+exclude = ["tests", "alembic"]
+mypy_path = "typings"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

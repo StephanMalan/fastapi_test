@@ -1,0 +1,10 @@
+/.coverage
+/.mypy_cache
+/.pytest_cache
+/.ruff_cache
+/.venv
+/INTRODUCTION.md
+/README.md
+/__pycache__
+/htmlcov
+/requirements
